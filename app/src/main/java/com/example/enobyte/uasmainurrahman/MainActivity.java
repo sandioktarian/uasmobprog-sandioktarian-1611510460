@@ -109,9 +109,8 @@ public class MainActivity extends AppCompatActivity{
 
     private void setPermissionForM() {
         String[] PERMISSION = {
-                android.Manifest.permission.READ_PHONE_STATE,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.RECEIVE_SMS,
         };
         if (!hasPermissions(this, PERMISSION)) {
             ActivityCompat.requestPermissions(this, PERMISSION, 1);
