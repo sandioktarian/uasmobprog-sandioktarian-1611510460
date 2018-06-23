@@ -1,0 +1,60 @@
+package com.example.enobyte.uasmainurrahman.adapter;
+
+import android.app.Activity;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.enobyte.uasmainurrahman.R;
+import com.example.enobyte.uasmainurrahman.database.Tablesms;
+
+import java.util.List;
+
+public class ListSMSDetailAdapter extends RecyclerView.Adapter<ListSMSDetailAdapter.Holder> {
+    private List<Tablesms> listData;
+    private Activity context;
+    private View itemLayoutView;
+
+    public ListSMSDetailAdapter(Activity context, List<Tablesms> listData) {
+        this.listData = listData;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_listdetailsms,
+                parent, false);
+        Holder holder = new Holder(itemLayoutView);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull Holder holder, int position) {
+        final Tablesms itemsms = listData.get(position);
+        holder.from.setText(itemsms.getNumber());
+        holder.content.setText(itemsms.getSmstext());
+        if (itemsms.getFrom().equalsIgnoreCase("r")){
+            holder.from.setText(itemsms.getNumber());
+        }else {
+            holder.from.setText("Me");
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return listData == null ? 0 : listData.size();
+    }
+
+    public class Holder extends RecyclerView.ViewHolder {
+        private TextView from, content;
+        public Holder(View itemView) {
+            super(itemView);
+            from = itemView.findViewById(R.id.from);
+            content = itemView.findViewById(R.id.content);
+        }
+    }
+}
