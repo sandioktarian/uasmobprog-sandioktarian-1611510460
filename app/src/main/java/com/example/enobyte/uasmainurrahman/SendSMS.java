@@ -74,7 +74,7 @@ public class SendSMS extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
 
                     TableSmsAdapter adapter = new TableSmsAdapter(SendSMS.this);
-                    adapter.insertData(new Tablesms(), phoneNo, message, "s", getCurrentDateandTime());
+                    adapter.insertData(new Tablesms(), phoneNo.replace("+62", "0"), message, "s", getCurrentDateandTime());
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "SMS faild, please try again.", Toast.LENGTH_LONG).show();

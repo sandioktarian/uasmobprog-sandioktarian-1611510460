@@ -33,7 +33,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     // Calling SMSActivity method to display using TextView
                     String fullSmsInfo = "From: " + phoneNumber + "\n" + message;
                     adapter = new TableSmsAdapter(context);
-                    adapter.insertData(new Tablesms(), phoneNumber, message, "r", getCurrentDateandTime());
+                    adapter.insertData(new Tablesms(), phoneNumber.replace("+62", "0"), message, "r", getCurrentDateandTime());
                 }
             }
         } catch (Exception e) {

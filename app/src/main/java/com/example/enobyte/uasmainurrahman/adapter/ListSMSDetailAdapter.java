@@ -3,6 +3,7 @@ package com.example.enobyte.uasmainurrahman.adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,13 @@ public class ListSMSDetailAdapter extends RecyclerView.Adapter<ListSMSDetailAdap
         holder.content.setText(itemsms.getSmstext());
         if (itemsms.getFrom().equalsIgnoreCase("r")){
             holder.from.setText(itemsms.getNumber());
+            holder.from.setGravity(Gravity.LEFT);
+            holder.content.setGravity(Gravity.LEFT);
+
         }else {
             holder.from.setText("Me");
+            holder.from.setGravity(Gravity.RIGHT);
+            holder.content.setGravity(Gravity.RIGHT);
         }
     }
 
