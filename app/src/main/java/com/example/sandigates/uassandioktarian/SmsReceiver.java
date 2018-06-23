@@ -1,4 +1,4 @@
-package com.example.enobyte.uasmainurrahman;
+package com.example.sandigates.uassandioktarian;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.enobyte.uasmainurrahman.database.TableSmsAdapter;
-import com.example.enobyte.uasmainurrahman.database.Tablesms;
+import com.example.sandigates.uassandioktarian.database.TableSmsAdapter;
+import com.example.sandigates.uassandioktarian.database.Tablesms;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

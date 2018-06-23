@@ -1,4 +1,4 @@
-package com.example.enobyte.uasmainurrahman;
+package com.example.sandigates.uassandioktarian;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.enobyte.uasmainurrahman.database.TableSmsAdapter;
-import com.example.enobyte.uasmainurrahman.database.Tablesms;
+import com.example.sandigates.uassandioktarian.database.TableSmsAdapter;
+import com.example.sandigates.uassandioktarian.database.Tablesms;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
