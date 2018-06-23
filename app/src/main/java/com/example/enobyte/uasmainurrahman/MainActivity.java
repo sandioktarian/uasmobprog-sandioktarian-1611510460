@@ -1,8 +1,14 @@
 package com.example.enobyte.uasmainurrahman;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,13 +17,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.enobyte.uasmainurrahman.adapter.ListSMSRecieveAdapter;
 import com.example.enobyte.uasmainurrahman.database.TableSmsAdapter;
 import com.example.enobyte.uasmainurrahman.database.Tablesms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
     private static RecyclerView recycleRecive;
@@ -30,6 +39,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setPermissionForM();
         recycleRecive = findViewById(R.id.recycleRecive);
         refreshLayout = findViewById(R.id.swipe);
         new DatabaseManager(this);
@@ -97,6 +107,40 @@ public class MainActivity extends AppCompatActivity{
         showList();
     }
 
+    private void setPermissionForM() {
+        String[] PERMISSION = {
+                android.Manifest.permission.READ_PHONE_STATE,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+        };
+        if (!hasPermissions(this, PERMISSION)) {
+            ActivityCompat.requestPermissions(this, PERMISSION, 1);
+        }
+    }
 
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Map<String, Integer> perm = new HashMap<>();
+        perm.put(Manifest.permission.SEND_SMS, PackageManager.PERMISSION_GRANTED);
+        perm.put(Manifest.permission.RECEIVE_SMS, PackageManager.PERMISSION_GRANTED);
+        for (int i = 0; i < permissions.length; i++) {
+            perm.put(permissions[i], grantResults[i]);
+            if (perm.get(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED
+                    && perm.get(Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Permision is Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
